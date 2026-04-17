@@ -7,9 +7,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record ResponseSub(UUID Id,
-                          LocalDateTime starDate,
-                          LocalDateTime endDate,
-                          SubscriptionEnum subscriptionType,
-                          User user,
-                          BigDecimal price) {}
+public record SubscriptionResponse(UUID id,
+                                   LocalDateTime startDate,
+                                   LocalDateTime endDate,
+                                   SubscriptionEnum subscriptionType,
+                                   User user,
+                                   BigDecimal price) {}
