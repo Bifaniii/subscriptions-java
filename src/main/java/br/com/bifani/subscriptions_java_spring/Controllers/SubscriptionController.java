@@ -2,6 +2,7 @@ package br.com.bifani.subscriptions_java_spring.Controllers;
 
 import br.com.bifani.subscriptions_java_spring.Entities.DTOs.SubscriptionRequest;
 import br.com.bifani.subscriptions_java_spring.Entities.DTOs.SubscriptionResponse;
+import br.com.bifani.subscriptions_java_spring.Entities.DTOs.SubscriptionUpdateRequest;
 import br.com.bifani.subscriptions_java_spring.Entities.Subscription;
 import br.com.bifani.subscriptions_java_spring.Repositories.ISubscriptionRepository;
 import br.com.bifani.subscriptions_java_spring.Services.SubscriptionService;
@@ -75,4 +76,19 @@ public class SubscriptionController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Subscription> updateSubscription(
+            @PathVariable UUID id,
+            @RequestBody SubscriptionRequest request) {
+        Subscription updated = service.updateSubscription(id, request);
+        return ResponseEntity.ok(updated);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Subscription> patchSubscription(
+            @PathVariable UUID id,
+            @RequestBody SubscriptionUpdateRequest request) {
+        Subscription updated = service.patchSubscription(id, request);
+        return ResponseEntity.ok(updated);
+    }
 }

@@ -1,6 +1,7 @@
 package br.com.bifani.subscriptions_java_spring.Services;
 
 import br.com.bifani.subscriptions_java_spring.Entities.DTOs.SubscriptionRequest;
+import br.com.bifani.subscriptions_java_spring.Entities.DTOs.SubscriptionUpdateRequest;
 import br.com.bifani.subscriptions_java_spring.Entities.Subscription;
 import br.com.bifani.subscriptions_java_spring.Entities.User;
 import br.com.bifani.subscriptions_java_spring.Repositories.ISubscriptionRepository;
@@ -59,5 +60,32 @@ public class SubscriptionService {
         repository.delete(existingSubscription);
     }
 
+    @Transactional
+    public Subscription updateSubscription(UUID id, SubscriptionRequest request) {
+        Subscription existing = getSubscriptionById(id);
+
+        if (existing == null) {
+            throw new RuntimeException("Subscription not found with id: " + id);
+        }
+
+        existing.setSubscriptionType(request.subscriptionType());
+        existing.setPrice(request.price());
+
+        return repository.save(existing);
+    }
+
+    @Transactional
+    public Subscription patchSubscription(UUID id, SubscriptionUpdateRequest request) {
+        Subscription existing = getSubscriptionById(id);
+
+        if (request.subscriptionType() != null) {
+            existing.setSubscriptionType(request.subscriptionType());
+        }
+        if (request.price() != null) {
+            existing.setPrice(request.price());
+        }
+
+        return repository.save(existing);
+    }
 
 }

@@ -1,0 +1,29 @@
+package br.com.bifani.subscriptions_java_spring.Controllers;
+
+import br.com.bifani.subscriptions_java_spring.Entities.DTOs.AuthRequest;
+import br.com.bifani.subscriptions_java_spring.Entities.DTOs.AuthResponse;
+import br.com.bifani.subscriptions_java_spring.Entities.DTOs.RegisterRequest;
+import br.com.bifani.subscriptions_java_spring.Services.AuthService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
+
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+        return ResponseEntity.ok(authService.register(request));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
+        return ResponseEntity.ok(authService.login(request));
+    }
+}
