@@ -4,7 +4,6 @@ import br.com.bifani.subscriptions_java_spring.Entities.DTOs.SubscriptionRequest
 import br.com.bifani.subscriptions_java_spring.Entities.DTOs.SubscriptionResponse;
 import br.com.bifani.subscriptions_java_spring.Entities.DTOs.SubscriptionUpdateRequest;
 import br.com.bifani.subscriptions_java_spring.Entities.Subscription;
-import br.com.bifani.subscriptions_java_spring.Repositories.ISubscriptionRepository;
 import br.com.bifani.subscriptions_java_spring.Services.SubscriptionService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
