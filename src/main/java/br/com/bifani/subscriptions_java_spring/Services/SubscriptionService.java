@@ -27,10 +27,8 @@ public class SubscriptionService {
     public Subscription createSubscription(SubscriptionRequest request) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new RuntimeException("User not found with email: " + email);
-        }
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
 
         Subscription sub = Subscription.builder()
                 .subscriptionType(request.subscriptionType())
